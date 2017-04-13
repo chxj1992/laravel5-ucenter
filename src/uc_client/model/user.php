@@ -134,7 +134,7 @@ class usermodel {
 		$sqladd .= $questionid > 0 ? " secques='".$this->quescrypt($questionid, $answer)."'," : " secques='',";
 		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."members SET $sqladd username='$username', password='$password', email='$email', regip='$regip', regdate='".$this->base->time."', salt='$salt'");
 		$uid = $this->db->insert_id();
-		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid'");
+		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid', blacklist=''");
 		return $uid;
 	}
 
