@@ -82,7 +82,7 @@ class notemodel {
 
 		$getdata = addslashes($getdata);
 		$postdata = addslashes($postdata);
-		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."notelist SET getdata='$getdata', operation='$operation', pri='$pri', postdata='$postdata'$extra");
+		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."notelist SET getdata='$getdata', operation='$operation', pri='$pri', postdata='$postdata'$extra", 'SILENT');
 		$insert_id = $this->db->insert_id();
 		$insert_id && $this->db->query("REPLACE INTO ".UC_DBTABLEPRE."vars (name, value) VALUES ('noteexists', '1')$varextra");
 		return $insert_id;
