@@ -58,8 +58,8 @@ class ucclient_db {
 	}
 
 	function result_first($sql) {
-		$query = $this->query($sql);
-		return $query->fetch_assoc();
+        $query = $this->query($sql);
+        return $this->result($query, 0);
 	}
 
 	function fetch_first($sql) {
@@ -102,9 +102,9 @@ class ucclient_db {
 		return intval(($this->link) ? mysqli_errno($this->link) : mysqli_errno());
 	}
 
-	function result($query, $row) {
-		$query = @mysqli_result($query, $row);
-		return $query;
+	function result($query, $column) {
+        $row = $query->fetch_row();
+        return $row[$column];
 	}
 
 	function num_rows($query) {
