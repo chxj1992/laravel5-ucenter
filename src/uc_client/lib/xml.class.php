@@ -66,13 +66,13 @@ class XML {
 		$this->data = '';
 		$this->failed = FALSE;
 		if(!$this->isnormal) {
-			if(isset($attributes['id']) && !is_string($this->document[$attributes['id']])) {
+			if(isset($attributes['id']) && @!is_string($this->document[$attributes['id']])) {
 				$this->document  = &$this->document[$attributes['id']];
 			} else {
 				$this->failed = TRUE;
 			}
 		} else {
-			if(!isset($this->document[$tag]) || !is_string($this->document[$tag])) {
+			if(!isset($this->document[$tag]) || @!is_string($this->document[$tag])) {
 				$this->document  = &$this->document[$tag];
 			} else {
 				$this->failed = TRUE;
