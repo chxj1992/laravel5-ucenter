@@ -69,14 +69,16 @@ class usercontrol extends base {
 		$questionid = $this->input('questionid');
 		$answer = $this->input('answer');
 		$regip = $this->input('regip');
+		$appid = $this->input('appid');
+        $name = $this->input('name');
 
-		if(($status = $this->_check_username($username)) < 0) {
+        if(($status = $this->_check_username($username)) < 0) {
 			return $status;
 		}
 		if(($status = $this->_check_email($email)) < 0) {
 			return $status;
 		}
-		$uid = $_ENV['user']->add_user($username, $password, $email, 0, $questionid, $answer, $regip);
+		$uid = $_ENV['user']->add_user($username, $password, $email, 0, $questionid, $answer, $regip, $appid, $name);
 		return $uid;
 	}
 

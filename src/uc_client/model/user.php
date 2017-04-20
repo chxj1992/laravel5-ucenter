@@ -126,7 +126,7 @@ class usermodel {
 		return $user['uid'];
 	}
 
-	function add_user($username, $password, $email, $uid = 0, $questionid = '', $answer = '', $regip = '') {
+	function add_user($username, $password, $email, $uid = 0, $questionid = '', $answer = '', $regip = '', $appid='', $name='') {
 		$regip = empty($regip) ? $this->base->onlineip : $regip;
 		$salt = substr(uniqid(rand()), -6);
 		$password = md5(md5($password).$salt);
@@ -134,8 +134,11 @@ class usermodel {
 		$sqladd .= $questionid > 0 ? " secques='".$this->quescrypt($questionid, $answer)."'," : " secques='',";
 		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."members SET $sqladd username='$username', password='$password', email='$email', regip='$regip', regdate='".$this->base->time."', salt='$salt'");
 		$uid = $this->db->insert_id();
-		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid', blacklist=''");
-		return $uid;
+        $this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid', blacklist=''");
+
+        $this->db->query("UPDATE  ".UC_DBTABLEPRE."members SET appid='$appid', name='$name'", 'SILENT');
+
+        return $uid;
 	}
 
 	function edit_user($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '') {
