@@ -142,8 +142,8 @@ class ucclient_db {
 	}
 
 	function halt($message = '', $sql = '') {
-		$error = mysqli_error();
-		$errorno = mysqli_errno();
+		$error = mysqli_error($this->link);
+		$errorno = mysqli_errno($this->link);
 		if($errorno == 2006 && $this->goneaway-- > 0) {
 			$this->connect($this->dbhost, $this->dbuser, $this->dbpw, $this->dbname, $this->dbcharset, $this->pconnect, $this->tablepre, $this->time);
 			$this->query($sql);
