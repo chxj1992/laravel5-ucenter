@@ -136,7 +136,7 @@ class usermodel {
 		$uid = $this->db->insert_id();
         $this->db->query("INSERT INTO ".UC_DBTABLEPRE."memberfields SET uid='$uid', blacklist=''");
 
-        $this->db->query("UPDATE  ".UC_DBTABLEPRE."members SET appid='$appid', name='$name'", 'SILENT');
+        $this->db->query("UPDATE  ".UC_DBTABLEPRE."members SET appid='$appid', name='$name' WHERE uid='$uid'", 'SILENT');
 
         return $uid;
 	}
